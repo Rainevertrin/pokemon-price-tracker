@@ -1,3 +1,4 @@
+import os
 import datetime
 import logging
 from auth_gsheet import auth_gsheet
@@ -6,9 +7,8 @@ from tcg_scraper import TCGScraper
 def update_sheet():
     logging.info("Updating gsheet")
     client = auth_gsheet()
-    sheet = client.open_by_url(
-        "https://docs.google.com/spreadsheets/d/1gyEOF4oKwsgdEAmHBI6wOU75jjLakQ7g5zZfum5HZe8"
-    ).sheet1
+    url = os.environ.get("GSHEET_URL")
+    sheet = client.open_by_url(url).sheet1
 
     data = sheet.get_all_values()
     headers = data[0]
