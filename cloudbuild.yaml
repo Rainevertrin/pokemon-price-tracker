@@ -14,7 +14,7 @@ steps:
       [
         'run', 'deploy', 'pokemon-price-tracker',
         '--image', 'gcr.io/$PROJECT_ID/pokemon-price-tracker',
-        '--region', 'global',
+        '--region', 'europe-central2',
         '--platform', 'managed',
         '--allow-unauthenticated'
       ]
