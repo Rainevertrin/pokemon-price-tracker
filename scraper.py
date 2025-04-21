@@ -1,23 +1,23 @@
-from flask import Flask, jsonify
 import os
-from auth_gsheet import auth_gsheet
+from flask import Flask
+import logging
+from threading import Thread
+from update_gsheet import update_sheet
+
+def run_scraper():
+    logging.info("Running update_sheet...")
+    update_sheet()
+    logging.info("Finished update_sheet.")
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@app.route("/")
 def home():
-    return jsonify({"status": "running"})
+    return "Pokemon Price Tracker is running!"
 
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    try:
-        # Połącz z arkuszem
-        client = auth_gsheet()
-        # Tutaj logika pracy z arkuszem
-        return jsonify({"status": "success", "data": "dane z arkusza"})
-    except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+if __name__ == "__main__":
+    scraper_thread = Thread(target=run_scraper)
+    scraper_thread.start()
 
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)
