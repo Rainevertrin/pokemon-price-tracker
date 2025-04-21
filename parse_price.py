@@ -1,5 +1,7 @@
 import logging
 
+logging.basicConfig(level=logging.INFO)
+
 def parse_price(price_text):
     try:
         clean = price_text.replace("$", "").replace(",", "").strip()

@@ -11,6 +11,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from parse_price import parse_price
 
+logging.basicConfig(level=logging.INFO)
+
 class TCGScraper:
     def __init__(self):
         options = webdriver.ChromeOptions()

@@ -4,6 +4,8 @@ import logging
 from auth_gsheet import auth_gsheet
 from tcg_scraper import TCGScraper
 
+logging.basicConfig(level=logging.INFO)
+
 def update_sheet():
     logging.info("Updating gsheet")
     client = auth_gsheet()
