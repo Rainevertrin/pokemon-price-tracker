@@ -13,8 +13,10 @@ RUN curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_am
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy app code
-COPY tcg_scraper.py .
+# Copy all application files
+COPY scraper.py auth_gsheet.py update_gsheet.py tcg_scraper.py ./
+
+ENV PORT=8080
 
 # Start app
 CMD ["python", "scraper.py"]
