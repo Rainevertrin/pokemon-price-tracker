@@ -19,6 +19,9 @@ def home():
 
 @app.route("/tasks/schedule", methods=["POST"])
 def schedule_task():
+    if request.content_type != "application/json":
+        return "Unsupported Media Type", 415
+
     envelope = request.get_json()
     if not envelope:
         return "Bad Request: No Pub/Sub message received", 400
