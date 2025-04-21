@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy all application files
-COPY scraper.py auth_gsheet.py update_gsheet.py tcg_scraper.py ./
+COPY scraper.py auth_gsheet.py update_gsheet.py tcg_scraper.py parse_price.py ./
 
 ENV PORT=8080
 
