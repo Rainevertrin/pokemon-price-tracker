@@ -5,7 +5,7 @@ FROM python:3.12
 WORKDIR /app
 
 # Install necessary libraries and dependencies for Chrome
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y \RUN apt-get update && apt-get install -y \
     wget \
     gnupg2 \
     curl \
@@ -25,13 +25,13 @@ RUN apt-get update && apt-get install -y \
     libxdamage1 \
     libxrandr2 \
     xdg-utils \
+    libvulkan1 \
+    libgbm-dev \
     --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
-
-# Install Google Chrome
-RUN curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb && \
+    curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb && \
     apt-get install -y ./chrome.deb && \
-    rm chrome.deb
+    rm chrome.deb && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
