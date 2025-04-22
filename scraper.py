@@ -20,7 +20,7 @@ def home():
 @app.route("/tasks/schedule", methods=["POST"])
 def schedule_task():
     if request.content_type != "application/json":
-        return "Unsupported Media Type", 415
+        return "Unsupported Media Type. Please use Content-Type: application/json", 415
 
     envelope = request.get_json()
     if not envelope:
