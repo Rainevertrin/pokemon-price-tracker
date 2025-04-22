@@ -1,11 +1,11 @@
 # Use an official Python slim image
-FROM python:3.12
+FROM python:3.12-slim
 
 # Set the working directory
 WORKDIR /app
 
-# Install necessary libraries and dependencies for Chrome
-RUN apt-get update && apt-get install -y \RUN apt-get update && apt-get install -y \
+# Install necessary libraries and dependencies
+RUN apt-get update && apt-get install -y \
     wget \
     gnupg2 \
     curl \
@@ -28,10 +28,13 @@ RUN apt-get update && apt-get install -y \RUN apt-get update && apt-get install 
     libvulkan1 \
     libgbm-dev \
     --no-install-recommends && \
-    curl -sSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o chrome.deb && \
-    apt-get install -y ./chrome.deb && \
-    rm chrome.deb && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Google Chrome
+RUN wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get update && apt-get install -y ./google-chrome.deb && \
+    rm google-chrome.deb && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
